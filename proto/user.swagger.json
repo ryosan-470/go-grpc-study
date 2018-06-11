@@ -1,0 +1,161 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "operationId": "GetUsersByGroup",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/gatewayUsersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "group",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "USER",
+              "ADMIN",
+              "DEVELOPER"
+            ],
+            "default": "USER"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "operationId": "GetUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/gatewayUserResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      },
+      "put": {
+        "operationId": "UpdateUser",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/gatewayEmpty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/gatewayUpdateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "gatewayEmpty": {
+      "type": "object"
+    },
+    "gatewayGroup": {
+      "type": "string",
+      "enum": [
+        "USER",
+        "ADMIN",
+        "DEVELOPER"
+      ],
+      "default": "USER"
+    },
+    "gatewayUpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "gatewayUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "gatewayUsersResponse": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "$ref": "#/definitions/gatewayGroup"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/gatewayUserResponse"
+          }
+        }
+      }
+    }
+  }
+}
