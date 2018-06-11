@@ -1,0 +1,98 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "proto/money.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/money/status": {
+      "get": {
+        "operationId": "GetStatus",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/moneyUserMoneyResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "MoneyService"
+        ]
+      }
+    },
+    "/v1/money/use": {
+      "post": {
+        "operationId": "UseMoney",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/moneyUserMoneyResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/moneyUserMoneyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MoneyService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "moneyUserMoneyRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "moneyUserMoneyResponse": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "money": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  }
+}
