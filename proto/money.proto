@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package money;
+
+service MoneyService {
+    rpc GetStatus(UserRequest) returns (UserMoneyResponse) {
+        option (google.api.http) = {
+            get: "/v1/money/status"
+        };
+    }
+
+    rpc UseMoney(UserMoneyRequest) returns (UserMoneyResponse) {
+        option (google.api.http) = {
+            post: "/v1/money/use"
+            body: "*"
+        };
+    }
+}
+
+message UserRequest {
+    int32 user_id = 1;
+}
+
+message UserMoneyRequest {
+    int32 user_id = 1;
+    int32 money = 2;
+}
+
+message UserMoneyResponse {
+    int32 user_id = 1;
+    int32 money = 2;
+}
